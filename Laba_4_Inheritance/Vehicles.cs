@@ -33,15 +33,28 @@ namespace Laba_4_Inheritance
         public TypeOfBike type = TypeOfBike.mountain;
         public int radius = 0;
 
-        //var bicycle1 = new Bicycle { type = "Горный", radius = 13 };
-        //var bicycle2 = new Bicycle { type = "Городской", radius = 15 };
-        //var bicycle3 = new Bicycle { type = "Детский", radius = 10 };
         public override String GetInfo()
         {
-            var str = "Вам достаётся велосипед";
-            str += String.Format("\nТип {0}", this.type);
-            str += String.Format("\nРадиус {0}", this.radius, "″");
+            var str = "Вам достаётся велосипед!";
+            str += String.Format("\nТип: {0}", GetTypeString(this.type));
+            str += String.Format("\nРадиус: {0}", this.radius);
+            str += String.Format("″");
             return str;
+        }
+
+        private string GetTypeString(TypeOfBike type)
+        {
+            switch (type)
+            {
+                case TypeOfBike.mountain:
+                    return "Горный";
+                case TypeOfBike.urban:
+                    return "Городской";
+                case TypeOfBike.children:
+                    return "Детский";
+                default:
+                    return "неизвестный тип";
+            }
         }
 
         public static Bike Generate()
@@ -49,7 +62,8 @@ namespace Laba_4_Inheritance
             //var rnd = new Random();
             return new Bike
             {
-                radius = rnd.Next() % 25
+                type = (TypeOfBike)rnd.Next(3),
+                radius = 5 + rnd.Next() % 25
             };
         }
     }
@@ -64,11 +78,30 @@ namespace Laba_4_Inheritance
 
         public override String GetInfo()
         {
-            var str = "Вам достаётся автомобиль";
-            str += String.Format("\nТип {0}", this.type);
-            str += String.Format("\nОбъем двигателя {0}", this.engine_capacity, "л.с.");
-            str += String.Format("\nКоличество дверей {0}", this.number_of_doors, "шт");
+            var str = "Вам достаётся автомобиль!";
+            str += String.Format("\nТип: {0}", GetTypeString(this.type));
+            str += String.Format("\nОбъем двигателя: {0}", this.engine_capacity);
+            str += String.Format("л.с.");
+            str += String.Format("\nКоличество дверей: {0}", this.number_of_doors);
+            str += String.Format("шт");
             return str;
+        }
+
+        private string GetTypeString(TypeOfCar type)
+        {
+            switch (type)
+            {
+                case TypeOfCar.bus:
+                    return "Автобус";
+                case TypeOfCar.truck:
+                    return "Грузовик";
+                case TypeOfCar.offroad:
+                    return "Внедорожник";
+                case TypeOfCar.passenger:
+                    return "Легковой автомобиль";
+                default:
+                    return "неизвестный тип";
+            }
         }
 
         public static Car Generate()
@@ -76,8 +109,9 @@ namespace Laba_4_Inheritance
             //var rnd = new Random();
             return new Car
             {
-                engine_capacity = rnd.Next() % 301,
-                number_of_doors = rnd.Next() % 6
+                type = (TypeOfCar)rnd.Next(4),
+                engine_capacity =64 + rnd.Next() % 301,
+                number_of_doors =2 + rnd.Next() % 6
             };
         }
     }
@@ -91,10 +125,24 @@ namespace Laba_4_Inheritance
 
         public override String GetInfo()
         {
-            var str = "Вам достаётся самолёт";
-            str += String.Format("\nТип {0}", this.type);
-            str += String.Format("\nМаксимальная высота полета {0}", this.maximum_flight_altitude, "м");
+            var str = "Вам достаётся самолёт!";
+            str += String.Format("\nТип: {0}", GetTypeString(this.type));
+            str += String.Format("\nМаксимальная высота полета: {0}", this.maximum_flight_altitude);
+            str += String.Format("м");
             return str;
+        }
+
+        private string GetTypeString(TypeOfEnginePlane type)
+        {
+            switch (type)
+            {
+                case TypeOfEnginePlane.piston_engine:
+                    return "Поршневой двигатель (пропеллерный)";
+                case TypeOfEnginePlane.jet_engine:
+                    return "Реактивный двигатель";
+                default:
+                    return "неизвестный тип";
+            }
         }
 
         public static Plane Generate()
@@ -102,7 +150,8 @@ namespace Laba_4_Inheritance
             //var rnd = new Random();
             return new Plane
             {
-                maximum_flight_altitude = rnd.Next() % 12001
+                type = (TypeOfEnginePlane)rnd.Next(2),
+                maximum_flight_altitude =100 + rnd.Next() % 12001
             };
         }
     }
